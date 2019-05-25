@@ -42,7 +42,7 @@ app.listen(port, host, function() {
 
   bot.onText(/\/contas/, msg => {
     const dueDate =
-      "Dia 15 - Água 🚰\n\nDia 17 - Internet 💻\n\nDia 22 - Luz 💡\n\nDia 24 - Aluguel 🏠";
+      "Dia 15 - Água 🚰\n\nDia 15 - Internet 💻\n\nDia 22 - Luz 💡\n\nDia 24 - Aluguel 🏠";
     bot.sendMessage(msg.chat.id, dueDate);
   });
 });

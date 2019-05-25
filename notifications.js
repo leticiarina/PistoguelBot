@@ -1,7 +1,7 @@
 const balance = require("./balance");
 
 const WATER = 15;
-const INTERNET = 17;
+const INTERNET = 15;
 const LIGHT = 22;
 const RENT = 24;
 
