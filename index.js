@@ -53,7 +53,7 @@ app.listen(port, host, function() {
   bot.onText(/\/help/, msg => {
     bot.sendMessage(
       msg.chat.id,
-      "/contas - Mostra a data de vencimento de cada conta\n\n/splitwise - Mostra o saldo de todo mundo no Splitwise\n\nAlém disso, mando uma mensagem quando faltar três dias para o vencimento de alguma conta, junto com o @ da pessoa com maior saldo devedor."
+      "/start - Apresentação\n/help - Comandos do bot\n/comprar - Adiciona item na lista de compras\n/comprado - Remove item da lista de compras\n/contas - Data de vencimento de cada conta\n/listadecompras - Itens que precisam ser comprados\n/pago - Marca uma conta como paga\n/splitwise - Saldo de todo mundo no Splitwise\n\nAlém disso, mando uma mensagem quando faltar três dias para o vencimento de alguma conta, junto com o @ da pessoa com maior saldo devedor."
     );
   });
 
