@@ -1,0 +1,8 @@
+start - Apresentação
+help - Comandos do bot
+comprar - Adiciona item na lista de compras
+comprado - Remove item da lista de compras
+contas - Data de vencimento de cada conta
+listadecompras - Itens que precisam ser comprados
+pago - Marca uma conta como paga
+splitwise - Saldo de todo mundo no Splitwise
