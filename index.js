@@ -17,6 +17,8 @@ paidExpenses = {
   rent: false
 };
 
+groceryList = [];
+
 app.listen(port, host, function() {
   if (PISTOGUEL_CHAT) {
     let notifyGroup = null;
@@ -66,6 +68,68 @@ app.listen(port, host, function() {
         keyboard: [["🚰 Água", "💻 Internet"], ["💡 Luz", "🏠 Aluguel"]]
       }
     });
+  });
+
+  bot.onText(/\/listadecompras/, msg => {
+    let message = "";
+
+    if (groceryList.length === 0) {
+      message =
+        "Nada de novo pra comprar :(\nPara adicionar um item, digite /comprar <item>";
+    } else {
+      groceryList.map(item => {
+        message = message.concat(`- ${item}\n`);
+      });
+    }
+    bot.sendMessage(msg.chat.id, message);
+  });
+
+  bot.onText(/\/comprar(.*)/, (msg, match) => {
+    let message = "";
+    if (match[1] === "") {
+      message =
+        "Para adicionar um item na lista de compras, digite /comprar &lt;item&gt;";
+    } else {
+      const item = match[1].slice(1);
+      groceryList.push(item);
+      message = `Adicionado à lista de compras: <b>${item}</b>`;
+      console.log(`Added ${item} to grocery list.\n`);
+    }
+    bot.sendMessage(msg.chat.id, message, { parse_mode: "HTML" });
+  });
+
+  bot.onText(/\/comprado(.*)/, (msg, match) => {
+    let message = "";
+    if (match[1] === "") {
+      message =
+        "Para remover um item da lista de compras, digite /comprado &lt;item&gt;\n\n<b>Lista de compras</b>:\n";
+      if (groceryList.length === 0) {
+        message = message.concat("Vazia");
+      } else {
+        groceryList.map(item => {
+          message = message.concat(`- ${item}\n`);
+        });
+      }
+    } else {
+      const item = match[1].slice(1);
+      const index = groceryList.indexOf(item);
+      if (index != -1) {
+        groceryList.splice(index, 1);
+        message = `Removido da lista de compras: <b>${item}</b>`;
+        console.log(`Removed ${item} from grocery list.\n`);
+      } else {
+        message =
+          "Item não encontrado. Para remover um item da lista de compras, digite /comprado &lt;item&gt;\n\n<b>Lista de compras:\n</b>";
+        if (groceryList.length === 0) {
+          message = message.concat("Vazia");
+        } else {
+          groceryList.map(item => {
+            message = message.concat(`- ${item}\n`);
+          });
+        }
+      }
+    }
+    bot.sendMessage(msg.chat.id, message, { parse_mode: "HTML" });
   });
 
   bot.on("message", msg => {
