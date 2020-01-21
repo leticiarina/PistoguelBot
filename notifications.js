@@ -1,7 +1,7 @@
 const balance = require("./balance");
 
 const WATER_INTERNET = 15;
-const LIGHT = 22;
+const LIGHT = 17;
 const RENT = 24;
 
 module.exports = {
@@ -16,9 +16,9 @@ module.exports = {
       let mostNegative = await balance.mostNegative();
 
       if (!paidExpenses.water && !paidExpenses.internet) {
-        if (day === WATER_INTERNET - 3) {
+        if (day === WATER_INTERNET - 1) {
           message =
-            "As contas de <b>água</b> e <b>internet</b> vencem daqui <b>três</b> dias! 🚰💻\n\n";
+            "As contas de <b>água</b> e <b>internet</b> vencem <b>amanhã</b>! 🚰💻\n\n";
           message = message.concat(mostNegative);
         } else if (day === WATER_INTERNET) {
           message =
@@ -26,18 +26,18 @@ module.exports = {
           message = message.concat(mostNegative);
         }
       } else if (!paidExpenses.water && paidExpenses.internet) {
-        if (day === WATER_INTERNET - 3) {
+        if (day === WATER_INTERNET - 1) {
           message =
-            "A conta de <b>água</b> vence daqui <b>três</b> dias! 🚰\n\n";
+            "A conta de <b>água</b> vence <b>amanhã</b>! 🚰\n\n";
           message = message.concat(mostNegative);
         } else if (day === WATER_INTERNET) {
           message = "A conta de <b>água</b> vence <b>hoje</b>! 🚰\n\n";
           message = message.concat(mostNegative);
         }
       } else if (paidExpenses.water && !paidExpenses.internet) {
-        if (day === WATER_INTERNET - 3) {
+        if (day === WATER_INTERNET - 1) {
           message =
-            "A conta de <b>internet</b> vence daqui <b>três</b> dias! 💻\n\n";
+            "A conta de <b>internet</b> vence <b>amanhã</b>! 💻\n\n";
           message = message.concat(mostNegative);
         } else if (day === WATER_INTERNET) {
           message = "A conta de <b>internet</b> vence <b>hoje</b>! 💻\n\n";
@@ -46,9 +46,9 @@ module.exports = {
       }
 
       if (!paidExpenses.light) {
-        if (day === LIGHT - 3) {
+        if (day === LIGHT - 1) {
           message =
-            "A conta de <b>luz</b> vence daqui <b>três</b> dias! 💡\n\n";
+            "A conta de <b>luz</b> vence <b>amanhã</b>! 💡\n\n";
           message = message.concat(mostNegative);
         } else if (day === LIGHT) {
           message = "A conta de <b>luz</b> vence <b>hoje</b>! 💡\n\n";
@@ -57,10 +57,10 @@ module.exports = {
       }
 
       if (!paidExpenses.rent) {
-        if (day === RENT - 3) {
-          message = "O <b>aluguel</b> vence daqui <b>três</b> dias! 🏠";
+        if (day === RENT - 1) {
+          message = "O <b>aluguel</b> vence <b>amanhã</b>! 🏠\n\n@Aluguel @leticiarina @mrpipizones @leopiccaro";
         } else if (day === RENT) {
-          message = "O <b>aluguel</b> vence <b>hoje</b>! 🏠";
+          message = "O <b>aluguel</b> vence <b>hoje</b>! 🏠\n\n@Aluguel @leticiarina @mrpipizones @leopiccaro";
         }
       }
     }
