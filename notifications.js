@@ -1,6 +1,7 @@
 const balance = require("./balance");
 const cleaningDays = require("./cleaning");
 
+const GATE = 07;
 const WATER_INTERNET = 15;
 const LIGHT = 17;
 const RENT = 24;
@@ -15,6 +16,15 @@ module.exports = {
 
     if (hour === 15 && minute === 00) {
       let mostNegative = await balance.mostNegative();
+
+      if (day === GATE - 1) {
+        message =
+          "A parcela do <b>portão</b> vence <b>amanhã</b>! 🏠\n\nValor: R$97.92\n\n@Aluguel @leticiarina @mrpipizones @leopiccaro";
+      } else if (day === GATE) {
+        message =
+          "A parcela do <b>portão</b> vence <b>hoje</b>! 🏠\n\nValor: R$97.92\n\n@Aluguel @leticiarina @mrpipizones @leopiccaro";
+        message = message.concat(mostNegative);
+      }
 
       if (!paidExpenses.water && !paidExpenses.internet) {
         if (day === WATER_INTERNET - 1) {
