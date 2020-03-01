@@ -1,4 +1,5 @@
 const balance = require("./balance");
+const cleaningDays = require("./cleaning");
 
 const WATER_INTERNET = 15;
 const LIGHT = 17;
@@ -27,8 +28,7 @@ module.exports = {
         }
       } else if (!paidExpenses.water && paidExpenses.internet) {
         if (day === WATER_INTERNET - 1) {
-          message =
-            "A conta de <b>água</b> vence <b>amanhã</b>! 🚰\n\n";
+          message = "A conta de <b>água</b> vence <b>amanhã</b>! 🚰\n\n";
           message = message.concat(mostNegative);
         } else if (day === WATER_INTERNET) {
           message = "A conta de <b>água</b> vence <b>hoje</b>! 🚰\n\n";
@@ -36,8 +36,7 @@ module.exports = {
         }
       } else if (paidExpenses.water && !paidExpenses.internet) {
         if (day === WATER_INTERNET - 1) {
-          message =
-            "A conta de <b>internet</b> vence <b>amanhã</b>! 💻\n\n";
+          message = "A conta de <b>internet</b> vence <b>amanhã</b>! 💻\n\n";
           message = message.concat(mostNegative);
         } else if (day === WATER_INTERNET) {
           message = "A conta de <b>internet</b> vence <b>hoje</b>! 💻\n\n";
@@ -47,8 +46,7 @@ module.exports = {
 
       if (!paidExpenses.light) {
         if (day === LIGHT - 1) {
-          message =
-            "A conta de <b>luz</b> vence <b>amanhã</b>! 💡\n\n";
+          message = "A conta de <b>luz</b> vence <b>amanhã</b>! 💡\n\n";
           message = message.concat(mostNegative);
         } else if (day === LIGHT) {
           message = "A conta de <b>luz</b> vence <b>hoje</b>! 💡\n\n";
@@ -58,11 +56,27 @@ module.exports = {
 
       if (!paidExpenses.rent) {
         if (day === RENT - 1) {
-          message = "O <b>aluguel</b> vence <b>amanhã</b>! 🏠\n\n@Aluguel @leticiarina @mrpipizones @leopiccaro";
+          message =
+            "O <b>aluguel</b> vence <b>amanhã</b>! 🏠\n\n@Aluguel @leticiarina @mrpipizones @leopiccaro";
         } else if (day === RENT) {
-          message = "O <b>aluguel</b> vence <b>hoje</b>! 🏠\n\n@Aluguel @leticiarina @mrpipizones @leopiccaro";
+          message =
+            "O <b>aluguel</b> vence <b>hoje</b>! 🏠\n\n@Aluguel @leticiarina @mrpipizones @leopiccaro";
         }
       }
+
+      cleaningDays.map(cleaningDay => {
+        const today = new Date();
+        const day = today.getDate();
+        const month = today.getMonth();
+
+        if (
+          day === cleaningDay.getDate() - 1 &&
+          month === cleaningDay.getMonth()
+        ) {
+          message = "Amanhã é dia de <b>faxina</b>! \n\n";
+          message = message.concat(mostNegative);
+        }
+      });
     }
     return message;
   },
