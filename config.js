@@ -7,7 +7,6 @@ module.exports = {
   BOT_TOKEN: process.env.BOT_TOKEN,
   PISTOGUEL_SPLT: process.env.PISTOGUEL_SPLT,
   PISTOGUEL_CHAT: process.env.PISTOGUEL_CHAT,
-  ANA_ID: process.env.ANA_ID,
   OSAMA_ID: process.env.OSAMA_ID,
   PINK_ID: process.env.PINK_ID,
   PINOQUIO_ID: process.env.PINOQUIO_ID,

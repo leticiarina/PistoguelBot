@@ -1,7 +1,6 @@
 const Splitwise = require("splitwise");
 const {
   PISTOGUEL_SPLT,
-  ANA_ID,
   OSAMA_ID,
   PINK_ID,
   PINOQUIO_ID,
@@ -35,9 +34,7 @@ module.exports = {
         emoji = "✅";
       }
 
-      if (member.id === parseInt(ANA_ID)) {
-        balance = balance.concat(`${emoji} Ana ${value} reais.\n\n`);
-      } else if (member.id === parseInt(OSAMA_ID)) {
+      if (member.id === parseInt(OSAMA_ID)) {
         balance = balance.concat(`${emoji} Osama ${value} reais.\n\n`);
       } else if (member.id === parseInt(PINK_ID)) {
         balance = balance.concat(`${emoji} Pink ${value} reais.\n\n`);
@@ -65,9 +62,6 @@ module.exports = {
       if (amount < balance) {
         balance = amount;
         switch (member.id) {
-          case parseInt(ANA_ID):
-            user = "@ana_troxa";
-            break;
           case parseInt(OSAMA_ID):
             user = "@Aluguel";
             break;
