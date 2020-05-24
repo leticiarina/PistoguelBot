@@ -7,7 +7,7 @@ const LIGHT = 17;
 const RENT = 24;
 
 module.exports = {
-  expenses: async paidExpenses => {
+  expenses: async (paidExpenses) => {
     let message = null;
     const today = new Date();
     const day = today.getDate();
@@ -23,7 +23,6 @@ module.exports = {
       } else if (day === GATE) {
         message =
           "A parcela do <b>portão</b> vence <b>hoje</b>! 🏠\n\nValor: R$97.92\n\n@Aluguel @leticiarina @mrpipizones @leopiccaro";
-        message = message.concat(mostNegative);
       }
 
       if (!paidExpenses.water && !paidExpenses.internet) {
@@ -74,7 +73,7 @@ module.exports = {
         }
       }
 
-      cleaningDays.map(cleaningDay => {
+      cleaningDays.map((cleaningDay) => {
         const today = new Date();
         const day = today.getDate();
         const month = today.getMonth();
@@ -94,5 +93,5 @@ module.exports = {
     const today = new Date();
     const day = today.getDate();
     return day === 1 ? true : false;
-  }
+  },
 };
