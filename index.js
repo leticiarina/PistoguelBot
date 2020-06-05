@@ -14,7 +14,7 @@ app.listen(port, host, function() {
   if (PISTOGUEL_CHAT) {
     let notifyGroup = null;
     setInterval(async () => {
-      notifyGroup = await notifications.expenses(paidExpenses);
+      notifyGroup = await notifications.expenses();
       notifyGroup
         ? bot.sendMessage(PISTOGUEL_CHAT, notifyGroup, { parse_mode: "HTML" })
         : false;
