@@ -1,7 +1,7 @@
 const balance = require("./balance");
 const cleaningDays = require("./cleaning");
+const changeCleaning = require("./changeCleaning");
 
-const GATE = 07;
 const WATER_INTERNET = 15;
 const LIGHT = 17;
 const RENT = 24;
@@ -15,15 +15,6 @@ const expenses = async () => {
 
   if (hour === 15 && minute === 00) {
     let mostNegative = await balance.mostNegative();
-
-    if (day === GATE - 1) {
-      message =
-        "A parcela do <b>portão</b> vence <b>amanhã</b>! 🏠\n\nValor: R$97.92\n\n@Aluguel @leticiarina @mrpipizones @leopiccaro";
-    } else if (day === GATE) {
-      message =
-        "A parcela do <b>portão</b> vence <b>hoje</b>! 🏠\n\nValor: R$97.92\n\n@Aluguel @leticiarina @mrpipizones @leopiccaro";
-      message = message.concat(mostNegative);
-    }
 
     if (day === WATER_INTERNET - 1) {
       message =
@@ -51,20 +42,34 @@ const expenses = async () => {
         "O <b>aluguel</b> vence <b>hoje</b>! 🏠\n\n@Aluguel @leticiarina @mrpipizones @leopiccaro";
     }
 
-    // Turned off due to pandemics
-    // cleaningDays.map(cleaningDay => {
-    //   const today = new Date();
-    //   const day = today.getDate();
-    //   const month = today.getMonth();
+    if (hour === 20 && minute === 00) {
+      changeCleaning.map(cleaningDay => {
+        const today = new Date();
+        const day = today.getDate();
+        const month = today.getMonth();
 
-    //   if (
-    //     day === cleaningDay.getDate() - 1 &&
-    //     month === cleaningDay.getMonth()
-    //   ) {
-    //     message = "Amanhã é dia de <b>faxina</b>! \n\n";
-    //     message = message.concat(mostNegative);
-    //   }
-    // });
+        if (
+          day === cleaningDay.getDate() &&
+          month === cleaningDay.getMonth()
+        ) {
+          message = "Atualizar planilha de limpeza! \n\nhttps://docs.google.com/spreadsheets/d/1zZloZSBKl-1h30LVrT0QJ6WZ4GPivM4EzkCEEFhGmW4/edit#gid=236045095";
+        }
+      });
+    }
+  // Turned off due to pandemics
+  // cleaningDays.map(cleaningDay => {
+  //   const today = new Date();
+  //   const day = today.getDate();
+  //   const month = today.getMonth();
+
+  //   if (
+  //     day === cleaningDay.getDate() - 1 &&
+  //     month === cleaningDay.getMonth()
+  //   ) {
+  //     message = "Amanhã é dia de <b>faxina</b>! \n\n";
+  //     message = message.concat(mostNegative);
+  //   }
+  // });
   }
   return message;
 }
